@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = 'atheist2197@naver.com'
 
   spec.summary       = 'android versioning for gradle kotlin DSL'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-android_versioning_kts"
+  spec.homepage      = "https://github.com/zmunm/fastlane-plugin-android-versioning-kts"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
