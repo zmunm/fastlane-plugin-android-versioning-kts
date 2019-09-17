@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-android_versioning_kts'
   spec.version       = Fastlane::AndroidVersioningKts::VERSION
   spec.author        = 'zmunm'
-  spec.email         = 'atheist2197@naver.com'
+  spec.email         = 'atheist2197@gmail.com'
 
   spec.summary       = 'android versioning for gradle kotlin DSL'
   spec.homepage      = "https://github.com/zmunm/fastlane-plugin-android-versioning-kts"

@@ -52,3 +52,7 @@ build-iPhoneSimulator/
 .idea/
 
 .rakeTasks
+
+fastlane/README.md
+
+fastlane/report.xml
