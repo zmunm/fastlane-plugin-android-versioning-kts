@@ -56,3 +56,5 @@ build-iPhoneSimulator/
 fastlane/README.md
 
 fastlane/report.xml
+
+.DS_Store

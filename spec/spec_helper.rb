@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
-
+include RSpec::Matchers
 require 'simplecov'
 
 # SimpleCov.minimum_coverage 95
