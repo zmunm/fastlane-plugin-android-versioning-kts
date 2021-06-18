@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Fastlane::Actions::SetValueInBuildAction do
-  describe "Set buildToolsVersion" do
+  describe 'Set buildToolsVersion' do
     before do
       copy_build_fixture
     end
@@ -11,7 +11,7 @@ describe Fastlane::Actions::SetValueInBuildAction do
         set_value_in_build(
           app_project_dir: \"../**/app\",
           key: \"buildToolsVersion\",
-          value: \"24.1.0\"
+          value: \"30.0.3\"
         )
       end").runner.execute(:test)
     end
@@ -25,9 +25,9 @@ describe Fastlane::Actions::SetValueInBuildAction do
       end").runner.execute(:test)
     end
 
-    it "should return incremented version code from build.gradle.kts" do
+    it 'should return incremented version code from build.gradle.kts' do
       execute_lane_test
-      expect(build_tools_version).to eq("24.1.0")
+      expect(build_tools_version).to eq('30.0.3')
     end
 
     after do
@@ -35,7 +35,7 @@ describe Fastlane::Actions::SetValueInBuildAction do
     end
   end
 
-  describe "Set a non string value" do
+  describe 'Set a non string value' do
     before do
       copy_build_fixture
     end
@@ -59,9 +59,9 @@ describe Fastlane::Actions::SetValueInBuildAction do
       end").runner.execute(:test)
     end
 
-    it "should return incremented version code from build.gradle.kts" do
+    it 'should return incremented version code from build.gradle.kts' do
       execute_lane_test
-      expect(version_code).to eq("123")
+      expect(version_code).to eq('123')
     end
 
     after do
@@ -69,7 +69,7 @@ describe Fastlane::Actions::SetValueInBuildAction do
     end
   end
 
-  describe "Set an empty string" do
+  describe 'Set an empty string' do
     before do
       copy_build_fixture
     end
@@ -93,9 +93,9 @@ describe Fastlane::Actions::SetValueInBuildAction do
       end").runner.execute(:test)
     end
 
-    it "should return updated suffix from build.gradle.kts" do
+    it 'should return updated suffix from build.gradle.kts' do
       execute_lane_test
-      expect(application_id_suffix).to eq(".beta")
+      expect(application_id_suffix).to eq('.beta')
     end
 
     after do

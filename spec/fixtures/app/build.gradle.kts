@@ -1,21 +1,22 @@
 android {
-    compileSdkVersion(28)
+	compileSdkVersion(28)
+	buildToolsVersion = "30.0.3"
 
-    defaultConfig {
-		versionCode = 12351
-		versionName = "1.6.0" // comment
-    }
+	defaultConfig {
+		versionCode = 12345
+		versionName = "1.0.0" // comment
+	}
 
-    productFlavors {
+	productFlavors {
 		create("demo") {
 			applicationIdSuffix = ".demo"
-			versionCode = 124
-			versionName = "1.3.0"
+			versionCode = 123
+			versionName = "1.2.1"
 		}
 		create("qa") {
 			applicationIdSuffix = ".demo.qa"
-			versionCode = 457
-			versionName = "1.2.0"
+			versionCode = 456
+			versionName = "1.1.1"
 		}
-    }
+	}
 }

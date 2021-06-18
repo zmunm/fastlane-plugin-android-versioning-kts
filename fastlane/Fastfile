@@ -29,7 +29,7 @@ end
 
 lane :bumpup do
   show_version()
-  
+
   increment_version_name(app_project_dir: '**/app', bump_type: 'minor')
   increment_version_code(app_project_dir: '**/app')
   increment_version_name(

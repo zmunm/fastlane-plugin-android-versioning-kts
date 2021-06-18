@@ -6,6 +6,7 @@ module Fastlane
     module SharedValues
       VERSION_CODE = :VERSION_CODE
     end
+
     class IncrementVersionCodeAction < Action
       def self.run(params)
         current_version_code = GetVersionCodeAction.run(params)
@@ -34,22 +35,22 @@ module Fastlane
       #####################################################
       def self.available_options
         [
-            FastlaneCore::ConfigItem.new(key: :app_project_dir,
-                                         env_name: "ANDROID_VERSIONING_APP_PROJECT_DIR",
-                                         description: "The path to the application source folder in the Android project (default: android/app)",
-                                         optional: true,
-                                         type: String,
-                                         default_value: "android/app"),
-            FastlaneCore::ConfigItem.new(key: :flavor,
-                                         env_name: "ANDROID_VERSIONING_FLAVOR",
-                                         description: "The product flavor name (optional)",
-                                         optional: true,
-                                         type: String),
-            FastlaneCore::ConfigItem.new(key: :version_code,
-                                         env_name: "ANDROID_VERSIONING_VERSION_CODE",
-                                         description: "Change to a specific version (optional)",
-                                         optional: true,
-                                         type: Integer)
+          FastlaneCore::ConfigItem.new(key: :app_project_dir,
+                                       env_name: "ANDROID_VERSIONING_APP_PROJECT_DIR",
+                                       description: "The path to the application source folder in the Android project (default: android/app)",
+                                       optional: true,
+                                       type: String,
+                                       default_value: "android/app"),
+          FastlaneCore::ConfigItem.new(key: :flavor,
+                                       env_name: "ANDROID_VERSIONING_FLAVOR",
+                                       description: "The product flavor name (optional)",
+                                       optional: true,
+                                       type: String),
+          FastlaneCore::ConfigItem.new(key: :version_code,
+                                       env_name: "ANDROID_VERSIONING_VERSION_CODE",
+                                       description: "Change to a specific version (optional)",
+                                       optional: true,
+                                       type: Integer)
         ]
       end
 

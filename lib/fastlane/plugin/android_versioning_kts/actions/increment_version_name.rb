@@ -6,6 +6,7 @@ module Fastlane
     module SharedValues
       VERSION_NAME = :VERSION_NAME
     end
+
     class IncrementVersionNameAction < Action
       def self.run(params)
         if params[:version_name].nil? or params[:version_name].empty?
@@ -45,30 +46,32 @@ module Fastlane
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :app_project_dir,
-                                  env_name: "ANDROID_VERSIONING_APP_PROJECT_DIR",
-                               description: "The path to the application source folder in the Android project (default: android/app)",
-                                  optional: true,
-                                      type: String,
-                             default_value: "android/app"),
+                                       env_name: "ANDROID_VERSIONING_APP_PROJECT_DIR",
+                                       description: "The path to the application source folder in the Android project (default: android/app)",
+                                       optional: true,
+                                       type: String,
+                                       default_value: "android/app"),
           FastlaneCore::ConfigItem.new(key: :flavor,
-                                    env_name: "ANDROID_VERSIONING_FLAVOR",
-                                 description: "The product flavor name (optional)",
-                                    optional: true,
-                                        type: String),
+                                       env_name: "ANDROID_VERSIONING_FLAVOR",
+                                       description: "The product flavor name (optional)",
+                                       optional: true,
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :bump_type,
-                                  env_name: "ANDROID_VERSIONING_BUMP_TYPE",
-                               description: "Change to a specific type (optional)",
-                                  optional: true,
-                                      type: String,
-                             default_value: "patch",
-                              verify_block: proc do |value|
-                                              UI.user_error!("Available values are 'patch', 'minor' and 'major'") unless ['patch', 'minor', 'major'].include? value
-                                            end),
+                                       env_name: "ANDROID_VERSIONING_BUMP_TYPE",
+                                       description: "Change to a specific type (optional)",
+                                       optional: true,
+                                       type: String,
+                                       default_value: "patch",
+                                       verify_block: proc do |value|
+                                                       UI.user_error!("Available values are 'patch', 'minor' and 'major'") unless [
+                                                         'patch', 'minor', 'major'
+                                                       ].include? value
+                                                     end),
           FastlaneCore::ConfigItem.new(key: :version_name,
-                                  env_name: "ANDROID_VERSIONING_VERSION_NAME",
-                               description: "Change to a specific version (optional)",
-                                  optional: true,
-                                      type: String)
+                                       env_name: "ANDROID_VERSIONING_VERSION_NAME",
+                                       description: "Change to a specific version (optional)",
+                                       optional: true,
+                                       type: String)
         ]
       end
 

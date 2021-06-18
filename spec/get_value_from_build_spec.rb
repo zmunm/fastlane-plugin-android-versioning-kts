@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Fastlane::Actions::GetValueFromBuildAction do
-  describe "Get compileSdkVersion" do
+  describe 'Get compileSdkVersion' do
     def execute_lane_test
       Fastlane::FastFile.new.parse("lane :test do
         get_value_from_build(
@@ -12,9 +12,9 @@ describe Fastlane::Actions::GetValueFromBuildAction do
       end").runner.execute(:test)
     end
 
-    it "should return compileSdkVersion from build.gradle.kts" do
+    it 'should return compileSdkVersion from build.gradle.kts' do
       result = execute_lane_test
-      expect(result).to eq("28")
+      expect(result).to eq('28')
     end
   end
 end

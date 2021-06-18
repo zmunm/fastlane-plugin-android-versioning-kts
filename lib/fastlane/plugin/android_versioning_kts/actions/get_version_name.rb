@@ -24,10 +24,10 @@ module Fastlane
                                        type: String,
                                        default_value: 'android/app'),
           FastlaneCore::ConfigItem.new(key: :flavor,
-                                      env_name: "ANDROID_VERSIONING_FLAVOR",
-                                      description: "The product flavor name (optional)",
-                                      optional: true,
-                                      type: String)
+                                       env_name: "ANDROID_VERSIONING_FLAVOR",
+                                       description: "The product flavor name (optional)",
+                                       optional: true,
+                                       type: String)
         ]
       end
 
