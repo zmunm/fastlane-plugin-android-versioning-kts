@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 
 module Fastlane
@@ -17,17 +19,21 @@ module Fastlane
       #####################################################
       def self.available_options
         [
-          FastlaneCore::ConfigItem.new(key: :app_project_dir,
-                                       env_name: 'ANDROID_VERSIONING_APP_PROJECT_DIR',
-                                       description: 'The path to the application source folder in the Android project (default: android/app)',
-                                       optional: true,
-                                       type: String,
-                                       default_value: 'android/app'),
-          FastlaneCore::ConfigItem.new(key: :flavor,
-                                       env_name: "ANDROID_VERSIONING_FLAVOR",
-                                       description: "The product flavor name (optional)",
-                                       optional: true,
-                                       type: String)
+          FastlaneCore::ConfigItem.new(
+            key: :app_project_dir,
+            env_name: 'ANDROID_VERSIONING_APP_PROJECT_DIR',
+            description: 'The path to the application source folder in the Android project (default: android/app)',
+            optional: true,
+            type: String,
+            default_value: 'android/app'
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :flavor,
+            env_name: 'ANDROID_VERSIONING_FLAVOR',
+            description: 'The product flavor name (optional)',
+            optional: true,
+            type: String
+          )
         ]
       end
 
@@ -37,7 +43,8 @@ module Fastlane
 
       def self.details
         [
-          "This action will return the current version name set on your project's build.gradle.kts."
+          "This action will return the current version name set
+            on your project's build.gradle.kts."
         ].join(' ')
       end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 
 module Fastlane
@@ -9,56 +11,63 @@ module Fastlane
         type ||= params[:type]
 
         case type
-        when "param"
-          regex = Regexp.new(/\s*(?<key>#{params[:key]}\s*=\s*)(?<left>[\'\"]?)(?<value>[a-zA-Z0-9\.\_]*)(?<right>[\'\"]?)(?<comment>.*)/)
-        when "function"
-          regex = Regexp.new(/\s*(?<key>#{params[:key]}\s*\(\s*)(?<left>[\'\"]?)(?<value>[a-zA-Z0-9\.\_]*)(?<right>[\'\"]?)(?<comment>.*\).*)/)
+        when 'param'
+          regex = /
+            \s*
+            (?<key>#{params[:key]}\s*=\s*)
+            (?<left>['"]?)
+            (?<value>[a-zA-Z0-9._]*)
+            (?<right>['"]?)
+            (?<comment>.*)
+          /x
+        when 'function'
+          regex = /
+            \s*
+            (?<key>#{params[:key]}\s*\(\s*)
+            (?<left>['"]?)
+            (?<value>[a-zA-Z0-9._]*)
+            (?<right>['"]?)
+            (?<comment>.*\).*)
+          /x
         else
           throw "#{type} is not valid type"
         end
 
         flavor = params[:flavor]
-        flavorSpecified = !(flavor.nil? or flavor.empty?)
+        flavor_specified = !(flavor.nil? or flavor.empty?)
         regex_flavor = Regexp.new(/[ \t]create\("#{flavor}"\)[ \t]/)
-        value = ""
+        value = ''
         found = false
-        flavorFound = false
-        productFlavorsSection = false
+        flavor_found = false
+        product_flavors_section = false
 
         Dir.glob("#{app_project_dir}/build.gradle.kts") do |path|
           UI.verbose("path: #{path}")
           UI.verbose("absolute_path: #{File.expand_path(path)}")
-          begin
-            File.open(path, 'r') do |file|
-              file.each_line do |line|
-                if flavorSpecified and !productFlavorsSection
-                  unless line.include? "productFlavors"
-                    next
-                  end
 
-                  productFlavorsSection = true
-                end
+          File.open(path, 'r') do |file|
+            file.each_line do |line|
+              if flavor_specified && !product_flavors_section
+                next unless line.include? 'productFlavors'
 
-                if flavorSpecified and !flavorFound
-                  unless line.match(regex_flavor)
-                    next
-                  end
-
-                  flavorFound = true
-                end
-
-                unless line.match(regex) and !found
-                  next
-                end
-
-                key, left, value, right, comment = line.match(regex).captures
-                break
+                product_flavors_section = true
               end
-              file.close
+
+              if flavor_specified && !flavor_found
+                next unless line.match(regex_flavor)
+
+                flavor_found = true
+              end
+
+              next unless line.match(regex) && !found
+
+              key, left, value, right, comment = line.match(regex).captures
+              break
             end
+            file.close
           end
         end
-        return value
+        value
       end
 
       #####################################################
@@ -66,30 +75,39 @@ module Fastlane
       #####################################################
       def self.available_options
         [
-          FastlaneCore::ConfigItem.new(key: :app_project_dir,
-                                       env_name: "ANDROID_VERSIONING_APP_PROJECT_DIR",
-                                       description: "The path to the application source folder in the Android project (default: android/app)",
-                                       optional: true,
-                                       type: String,
-                                       default_value: "android/app"),
-          FastlaneCore::ConfigItem.new(key: :flavor,
-                                       env_name: "ANDROID_VERSIONING_FLAVOR",
-                                       description: "The product flavor name (optional)",
-                                       optional: true,
-                                       type: String),
-          FastlaneCore::ConfigItem.new(key: :key,
-                                       description: "The property key",
-                                       type: String),
-          FastlaneCore::ConfigItem.new(key: :type,
-                                       description: "The property Type [\"function\", \"param\"])",
-                                       type: String,
-                                       default_value: "param")
+          FastlaneCore::ConfigItem.new(
+            key: :app_project_dir,
+            env_name: 'ANDROID_VERSIONING_APP_PROJECT_DIR',
+            description: 'The path to the application source folder
+              in the Android project (default: android/app)',
+            optional: true,
+            type: String,
+            default_value: 'android/app'
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :flavor,
+            env_name: 'ANDROID_VERSIONING_FLAVOR',
+            description: 'The product flavor name (optional)',
+            optional: true,
+            type: String
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :key,
+            description: 'The property key',
+            type: String
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :type,
+            description: 'The property Type ["function", "param"])',
+            type: String,
+            default_value: 'param'
+          )
 
         ]
       end
 
       def self.authors
-        ["zmunm"]
+        ['zmunm']
       end
 
       def self.is_supported?(platform)

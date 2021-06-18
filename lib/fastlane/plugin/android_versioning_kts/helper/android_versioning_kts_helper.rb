@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'fastlane_core/ui/ui'
 
 module Fastlane
-  UI = FastlaneCore::UI unless Fastlane.const_defined?("UI")
+  UI = FastlaneCore::UI unless Fastlane.const_defined?('UI')
 
   module Helper
     class AndroidVersioningKtsHelper
@@ -9,7 +11,7 @@ module Fastlane
       # as `Helper::AndroidVersioningKtsHelper.your_method`
       #
       def self.show_message
-        UI.message("Hello from the android_versioning_kts plugin helper!")
+        UI.message('Hello from the android_versioning_kts plugin helper!')
       end
     end
   end
