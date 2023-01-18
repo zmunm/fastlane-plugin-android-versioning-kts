@@ -54,7 +54,18 @@ module Fastlane
           end
           temp_file.rewind
           temp_file.close
-          FileUtils.mv(temp_file.path, path)
+
+          begin
+            FileUtils.mv(temp_file.path, path)
+          rescue => ex
+            if ex.message.to_s.include? "Operation not permitted"
+              FileUtils.cp(temp_file.path, path)
+              FileUtils.rm(temp_file.path)
+            else
+              raise ex
+            end
+          end
+
           temp_file.unlink
         end
       end
