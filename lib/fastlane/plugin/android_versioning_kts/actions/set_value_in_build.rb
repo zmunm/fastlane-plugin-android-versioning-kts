@@ -16,7 +16,7 @@ module Fastlane
           (?<comment>.*)
         /x
         flavor = params[:flavor]
-        flavor_specified = !(flavor.nil? or flavor.empty?)
+        flavor_specified = !(flavor.nil? || flavor.empty?)
         regex_flavor = /[ \t]create\("#{flavor}"\)[ \t]/
         found = false
         product_flavors_section = false
@@ -58,7 +58,7 @@ module Fastlane
           begin
             FileUtils.mv(temp_file.path, path)
           rescue => ex
-            if ex.message.to_s.include? "Operation not permitted"
+            if ex.message.to_s.include? 'Operation not permitted'
               FileUtils.cp(temp_file.path, path)
               FileUtils.rm(temp_file.path)
             else

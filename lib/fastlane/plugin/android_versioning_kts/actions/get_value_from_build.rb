@@ -34,7 +34,7 @@ module Fastlane
         end
 
         flavor = params[:flavor]
-        flavor_specified = !(flavor.nil? or flavor.empty?)
+        flavor_specified = !(flavor.nil? || flavor.empty?)
         regex_flavor = Regexp.new(/[ \t]create\("#{flavor}"\)[ \t]/)
         value = ''
         found = false
